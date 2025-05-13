@@ -20,7 +20,7 @@ public class Formulario {
 
             switch (escolha) {
                 case 1:
-                    try (FileWriter fw = new FileWriter(file); BufferedWriter bw = new BufferedWriter(fw)) {
+                    try (FileWriter fw = new FileWriter(file, true); BufferedWriter bw = new BufferedWriter(fw)) {
                         Aluno aluno = new Aluno();
                         aluno.inscreverAluno();
                         if (!Escola1.contains(aluno)) {
