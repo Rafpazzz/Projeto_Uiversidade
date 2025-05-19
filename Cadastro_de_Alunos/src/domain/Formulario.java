@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Formulario {
     public static void main(String[] args) {
         List<Aluno> Escola1 = new ArrayList<Aluno>();
+        Aluno aluno = new Aluno();
         int escolha;
         Scanner r = new Scanner(System.in);
         File file = new File("ListagemAlunos.txt");
@@ -19,11 +20,11 @@ public class Formulario {
             System.out.println("[3].Remover Aluno");
             System.out.println("Escolha : ");
             escolha = r.nextInt();
+            r.nextLine();
 
             switch (escolha) {
                 case 1:
                     try (FileWriter fw = new FileWriter(file, true); BufferedWriter bw = new BufferedWriter(fw)) {
-                        Aluno aluno = new Aluno();
                         aluno.inscreverAluno();
                         if (!Escola1.contains(aluno)) {
                             Escola1.add(aluno);
@@ -38,23 +39,21 @@ public class Formulario {
                     break;
 
                 case 2:
-                    try(FileReader fr = new FileReader(file);BufferedReader br = new BufferedReader(fr)) {
-                        String linha;
-                        while((linha = br.readLine()) != null) {
-                            System.out.println(linha);
-                        }
-                    }catch(IOException e) {
-                        e.printStackTrace();
-                    }
+                    System.out.println(Escola1);
                     break;
 
                 case 3:
                     RemocaoAlunoDAO remover = new RemocaoAlunoDAO();
-                    remover.removerAluno(Escola1, );
+                    System.out.print("Informe a matricula do aluno: ");
+                    String matricula;
+                    matricula = r.nextLine();
+                    aluno.setMatricula(matricula);
+                    remover.removerAluno(Escola1, aluno);
+                    break;
                 default:
                     System.out.println("Escolha errada");
             }
 
-        } while (escolha <= 3);
+        } while (escolha <= 4);
     }
 }
