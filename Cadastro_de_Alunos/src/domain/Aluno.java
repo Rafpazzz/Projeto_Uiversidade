@@ -3,6 +3,7 @@ package domain;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Aluno {
@@ -44,12 +45,15 @@ public class Aluno {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if(!(obj instanceof Aluno)) {
-            return false;
-        }
-        final Aluno a1 = (Aluno) obj;
-        return this.getMatricula().equals(a1.getMatricula());
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Aluno aluno = (Aluno) o;
+        return Objects.equals(matricula, aluno.matricula);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(matricula);
     }
 
     public String getMatricula() {
