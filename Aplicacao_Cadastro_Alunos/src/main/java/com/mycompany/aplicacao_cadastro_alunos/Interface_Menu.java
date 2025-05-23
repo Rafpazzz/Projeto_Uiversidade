@@ -4,8 +4,8 @@
  */
 package com.mycompany.aplicacao_cadastro_alunos;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 /**
  *
@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class Interface_Menu extends javax.swing.JFrame {
     List<Aluno> listAlunos = new ArrayList<Aluno>();
+    File file = new File("armazena.csv");
     /**
      * Creates new form Interface_Menu
      */
@@ -173,12 +174,13 @@ public class Interface_Menu extends javax.swing.JFrame {
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7)))
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,16 +222,17 @@ public class Interface_Menu extends javax.swing.JFrame {
         Aluno aluno = new Aluno();
         //aLUNO.SE
         listAlunos.add(aluno);
-        salvaArquivo();
+        salvarArquivo(file, aluno);
         ///
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void salvarArquivo(){
+    private void salvarArquivo(File file, Aluno aluno){
        try (FileWriter fw = new FileWriter(file, true); BufferedWriter bw = new BufferedWriter(fw)) {
                         aluno.inscreverAluno();
                         if (!listAlunos.contains(aluno)) {
                             listAlunos.add(aluno);
                             bw.write(aluno.toString());
+                            bw.newLine();
                         } else {
                             throw new RuntimeException("Elemento adicionado");
                         }
