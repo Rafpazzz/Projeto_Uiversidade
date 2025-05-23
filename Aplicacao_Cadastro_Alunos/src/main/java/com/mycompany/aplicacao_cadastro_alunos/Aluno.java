@@ -39,14 +39,13 @@ public class Aluno {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Aluno{");
-        sb.append(", matricula='").append(matricula).append('\'');
-        sb.append("nome='").append(nome).append('\'');
-        sb.append(", idade=").append(idade);
-        sb.append(", data='").append(data).append('\'');
-        sb.append(", telefone='").append(telefone).append('\'');
-        sb.append(", cpf=").append(Arrays.toString(cpf));
-        sb.append('}');
+         final StringBuilder sb = new StringBuilder();
+        sb.append(matricula).append(", ");
+        sb.append(nome).append(", ");
+        sb.append(idade).append(", ");
+        sb.append(data).append(", ");
+        sb.append(telefone).append(", ");
+        sb.append(Arrays.toString(cpf));
         return sb.toString();
     }
 

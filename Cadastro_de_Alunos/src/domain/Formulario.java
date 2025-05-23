@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Formulario {
-    List<Aluno> listAlunos = new ArrayList<Aluno>();
+    static List<Aluno> listAlunos = new ArrayList<Aluno>();
 
 
     public static void main(String[] args) {
         Aluno aluno = new Aluno();
         int escolha;
         Scanner r = new Scanner(System.in);
-        File file = new File("ListagemAlunos.txt");
+        File file = new File("ListagemAlunos.csv");
 
         do {
             System.out.println("Formulario de alunos");
@@ -69,12 +69,5 @@ public class Formulario {
             }
 
         } while (escolha <= 5);
-    }
-
-    public static String[] comparacaoIdade(List lista) {
-        String maior, menor;
-        for(int i = 0; i<lista.size(); i++){
-
-        }
     }
 }
