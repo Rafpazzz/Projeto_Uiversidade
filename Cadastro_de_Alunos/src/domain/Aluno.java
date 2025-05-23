@@ -34,8 +34,8 @@ public class Aluno {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Aluno{");
-        sb.append("nome='").append(nome).append('\'');
         sb.append(", matricula='").append(matricula).append('\'');
+        sb.append("nome='").append(nome).append('\'');
         sb.append(", idade=").append(idade);
         sb.append(", data='").append(data).append('\'');
         sb.append(", telefone='").append(telefone).append('\'');
