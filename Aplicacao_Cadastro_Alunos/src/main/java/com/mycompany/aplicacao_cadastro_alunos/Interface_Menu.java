@@ -86,6 +86,11 @@ public class Interface_Menu extends javax.swing.JFrame {
         jButton6.setToolTipText("");
 
         jTextField1.setText("jTextField1");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("MATRICULA");
 
@@ -218,13 +223,15 @@ public class Interface_Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         Aluno aluno = new Aluno();
-        //aLUNO.SE
         listAlunos.add(aluno);
         salvarArquivo(file, aluno);
-        ///
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    //evento para o espaço de escrever a matricula.
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void salvarArquivo(File file, Aluno aluno){
        try (FileWriter fw = new FileWriter(file, true); BufferedWriter bw = new BufferedWriter(fw)) {
