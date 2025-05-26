@@ -19,22 +19,15 @@ public class Aluno {
     private String data;
     private String telefone;
     private char[] cpf = new char [11];
-    public Scanner read = new Scanner(System.in);
-
-    public void inscreverAluno() {
-//        System.out.print("Informe a matricula: ");
-//        matricula = read.nextLine();
-//        System.out.print("Informe o nome: ");
-//        nome = read.nextLine();
-//        System.out.print("Informe telefone: ");
-//        telefone = read.nextLine();
-//        System.out.print("Informe data de nascimento: ");
-//        data = read.nextLine();
-//        System.out.print("Informe a idade: ");
-//        idade = read.nextInt();
-//        read.nextLine();
-//        System.out.print("Informe CPF: ");
-//        cpf = read.nextLine().toCharArray();
+    public static final Scanner read = new Scanner(System.in);
+    
+    public Aluno(String nome, String matricula, int idade, String data, String telefone, char[] cpf){
+        this.nome = nome;
+        this.matricula = matricula;
+        this.idade = idade;
+        this.data = data;
+        this.telefone = telefone;
+        this.cpf = cpf;
     }
 
     @Override
@@ -106,6 +99,11 @@ public class Aluno {
     }
 
     public void setCpf(char[] cpf) {
-        this.cpf = cpf;
+        if(cpf.length == 11){
+            this.cpf = cpf;
+        }
+        else{
+            System.out.println("CPF deve contar 11 caracteres!");
+        }
     }
 }

@@ -13,5 +13,9 @@ import java.util.List;
  * @author rafae
  */
 public interface AlunoDAO {
+    public List inserirAluno(List alunos, Aluno a);
     public List removerAluno(List alunos, Aluno a);
+    public List pesquisarAluno(List alunos, String matricula);
+    public List BuscaMaisNovo(List alunos);
+    public List BuscaMaisVelho(List alunos);
 }
