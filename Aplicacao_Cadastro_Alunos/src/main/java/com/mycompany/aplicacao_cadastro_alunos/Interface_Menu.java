@@ -6,6 +6,8 @@ package com.mycompany.aplicacao_cadastro_alunos;
 
 import java.io.*;
 import java.util.*;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -13,6 +15,7 @@ import java.util.*;
  */
 public class Interface_Menu extends javax.swing.JFrame {
     List<Aluno> listAlunos = new ArrayList<Aluno>();
+    AlunoDAOimpl alunoMod = new AlunoDAOimpl();
     File file = new File("armazena.csv");
     /**
      * Creates new form Interface_Menu
@@ -116,6 +119,12 @@ public class Interface_Menu extends javax.swing.JFrame {
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuscaMaisNovo(evt);
+            }
+        });
+
+        txtMatricula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMatriculaActionPerformed(evt);
             }
         });
 
@@ -248,20 +257,37 @@ public class Interface_Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_PesquisarAluno
 
     private void ExcluirAluno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirAluno
-        // TODO add your handling code here:
+        String matricula = txtMatricula.getText();
+        String nome = txtNome.getText();
+        String str = txtIdade.getText();
+        Integer idade = Integer.valueOf(str);
+        String data = txtData.getText();
+        String telefone = txtTelefone.getText();
+        String str2 = txtCPF.getText();
+        char[] cpf = str2.toCharArray();
+        Aluno aluno = new Aluno(nome, matricula, idade,data,telefone,cpf);
+        alunoMod.removerAluno(listAlunos, aluno);
+        JOptionPane.showMessageDialog(null,"Aluno de nome:" +aluno.getNome()+" e matricula:"+aluno.getMatricula()+" removido","Removendo Aluno", JOptionPane.INFORMATION_MESSAGE);
+        
     }//GEN-LAST:event_ExcluirAluno
 
     private void BuscaMaisVelho(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscaMaisVelho
-        // TODO add your handling code here:
+           Collections.sort(listAlunos);
+           JOptionPane.showMessageDialog(null, listAlunos.get(listAlunos.size()-1), "Aluno mais Velho", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_BuscaMaisVelho
 
     private void BuscaMaisNovo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscaMaisNovo
-        // TODO add your handling code here:
+        Collections.sort(listAlunos);
+        JOptionPane.showMessageDialog(null, listAlunos.get(0), "Aluno mais Novo", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_BuscaMaisNovo
 
     private void MostrarLista(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarLista
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, listAlunos.toString(),"Lista de Alunos Cadastrados", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_MostrarLista
+
+    private void txtMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatriculaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMatriculaActionPerformed
 
     private void salvarArquivo(File file, Aluno aluno){
        try (FileWriter fw = new FileWriter(file, true); BufferedWriter bw = new BufferedWriter(fw)) {

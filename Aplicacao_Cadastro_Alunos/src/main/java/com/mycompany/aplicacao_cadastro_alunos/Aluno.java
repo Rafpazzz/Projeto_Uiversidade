@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author rafae
  */
-public class Aluno {
+public class Aluno implements Comparable<Aluno> {
     private String nome;
     private String matricula;
     private int idade;
@@ -52,6 +52,17 @@ public class Aluno {
     @Override
     public int hashCode() {
         return Objects.hashCode(matricula);
+    }
+    
+    @Override
+    public int compareTo(Aluno aluno) {
+        if(this.getIdade() < aluno.getIdade()) {
+            return -1;
+        }else if(this.getIdade()==aluno.getIdade()){
+            return 0;
+        }else{
+            return 1;
+        }
     }
 
     public String getMatricula() {

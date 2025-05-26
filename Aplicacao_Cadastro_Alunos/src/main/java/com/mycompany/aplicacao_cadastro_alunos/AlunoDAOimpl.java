@@ -4,6 +4,9 @@
  */
 package com.mycompany.aplicacao_cadastro_alunos;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  *
  * @author joaoa
@@ -15,12 +18,23 @@ public class AlunoDAOimpl implements AlunoDAO{
     }
     
     public List removerAluno(List alunos, Aluno a){
+        for(int i = 0; i<alunos.size(); i++) {
+            if(alunos.contains(a)) {
+                alunos.remove(a);
+                break;
+            }else{
+                throw new RuntimeException("Matricula Invalida");
+            }
+        }
+        return alunos;
     }
+        
     
     public List pesquisarAluno(List alunos, String matricula){
     }
     
     public List BuscaMaisNovo(List alunos){
+        
     }
     
     public List BuscaMaisVelho(List alunos){
