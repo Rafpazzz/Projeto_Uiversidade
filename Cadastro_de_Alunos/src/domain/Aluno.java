@@ -40,6 +40,7 @@ public class Aluno {
         sb.append(data).append(", ");
         sb.append(telefone).append(", ");
         sb.append(Arrays.toString(cpf));
+        System.out.println("=========");
         return sb.toString();
     }
 
