@@ -3,7 +3,6 @@ package domain;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Aluno {
@@ -33,27 +32,24 @@ public class Aluno {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append(matricula).append(", ");
-        sb.append(nome).append(", ");
-        sb.append(idade);
-        sb.append(data).append(", ");
-        sb.append(telefone).append(", ");
-        sb.append(Arrays.toString(cpf));
-        System.out.println("=========");
+        final StringBuilder sb = new StringBuilder("Aluno{");
+        sb.append("nome='").append(nome).append('\'');
+        sb.append(", matricula='").append(matricula).append('\'');
+        sb.append(", idade=").append(idade);
+        sb.append(", data='").append(data).append('\'');
+        sb.append(", telefone='").append(telefone).append('\'');
+        sb.append(", cpf=").append(Arrays.toString(cpf));
+        sb.append('}');
         return sb.toString();
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Aluno aluno = (Aluno) o;
-        return Objects.equals(matricula, aluno.matricula);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(matricula);
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Aluno)) {
+            return false;
+        }
+        final Aluno a1 = (Aluno) obj;
+        return this.getMatricula().equals(a1.getMatricula());
     }
 
     public String getMatricula() {
