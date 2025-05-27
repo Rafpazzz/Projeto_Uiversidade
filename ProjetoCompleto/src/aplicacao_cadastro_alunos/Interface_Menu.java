@@ -4,6 +4,7 @@
  */
 package com.mycompany.aplicacao_cadastro_alunos;
 
+import aplicacao_cadastro_alunos.Aluno;
 import java.io.*;
 import java.util.*;
 

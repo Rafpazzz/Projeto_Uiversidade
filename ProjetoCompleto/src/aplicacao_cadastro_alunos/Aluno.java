@@ -1,8 +1,10 @@
+package aplicacao_cadastro_alunos;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.aplicacao_cadastro_alunos;
+
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -12,7 +14,7 @@ import java.util.Scanner;
  *
  * @author rafae
  */
-public class Aluno {
+public class Aluno{
     private String nome;
     private String matricula;
     private int idade;

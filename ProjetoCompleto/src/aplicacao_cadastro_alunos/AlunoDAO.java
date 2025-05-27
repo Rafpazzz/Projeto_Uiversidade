@@ -4,6 +4,7 @@
  */
 package com.mycompany.aplicacao_cadastro_alunos;
 
+import aplicacao_cadastro_alunos.Aluno;
 import java.util.List;
 
 
@@ -13,6 +14,8 @@ import java.util.List;
  * @author rafae
  */
 public interface AlunoDAO {
+    public boolean isEmpty(List alunos);
+    public boolean verificaExistencia(List alunos, Aluno a);
     public List inserirAluno(List alunos, Aluno a);
     public List removerAluno(List alunos, Aluno a);
     public List pesquisarAluno(List alunos, String matricula);
