@@ -18,7 +18,7 @@ public class AlunoDAOimpl implements AlunoDAO{
     
     @Override
     public boolean isEmpty(List alunos){ //verifica se vazia
-       return alunos == null || alunos isEmpty();
+       return alunos == null || alunos.isEmpty();
     }
     
     @Override
@@ -54,6 +54,15 @@ public class AlunoDAOimpl implements AlunoDAO{
     }
     
     public List removerAluno(List alunos, Aluno a){
+        for(int i = 0; i<alunos.size(); i++) {
+            if(alunos.contains(a)) {
+                alunos.remove(a);
+                break;
+            }else{
+                throw new RuntimeException("Matricula Invalida");
+            }
+        }
+        return alunos;
     }
     
     public List pesquisarAluno(List alunos, String matricula){
