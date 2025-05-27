@@ -31,12 +31,17 @@ public class AlunoDAOimpl implements AlunoDAO{
         
     
     public List pesquisarAluno(List alunos, String matricula){
+                return alunos;
+
     }
     
     public List BuscaMaisNovo(List alunos){
-        
+                return alunos;
+
     }
     
     public List BuscaMaisVelho(List alunos){
+                return alunos;
+
     }
 }
