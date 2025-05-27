@@ -14,7 +14,7 @@ import java.util.Scanner;
  *
  * @author rafae
  */
-public class Aluno{
+public class Aluno implements Comparable<Aluno>{
     private String nome;
     private String matricula;
     private int idade;
@@ -50,7 +50,18 @@ public class Aluno{
         Aluno aluno = (Aluno) o;
         return Objects.equals(matricula, aluno.matricula);
     }
-
+    
+    @Override
+    public int compareTo(Aluno o) {
+        if(this.getIdade() < o.getIdade()) {
+            return -1;
+        }else if(this.getIdade() == o.getIdade()) {
+            return 0;
+        }else {
+            return 1;
+        }
+    }
+    
     @Override
     public int hashCode() {
         return Objects.hashCode(matricula);
