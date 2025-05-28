@@ -245,7 +245,17 @@ public class Interface_Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InserirAluno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InserirAluno
-
+        String matricula = txtMatricula.getText();
+        String nome = txtNome.getText();
+        String str = txtIdade.getText();
+        Integer idade = Integer.valueOf(str);
+        String data = txtData.getText();
+        String telefone = txtTelefone.getText();
+        String str2 = txtCPF.getText();
+        char[] cpf = str2.toCharArray();
+        
+        Aluno alunoInserir = new Aluno(nome, matricula, idade,data,telefone,cpf);
+        alunoMod.inserirAluno(listAlunos, alunoInserir);
     }//GEN-LAST:event_InserirAluno
 
     private void PesquisarAluno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarAluno
@@ -261,20 +271,20 @@ public class Interface_Menu extends javax.swing.JFrame {
         String telefone = txtTelefone.getText();
         String str2 = txtCPF.getText();
         char[] cpf = str2.toCharArray();
+        
         Aluno aluno = new Aluno(nome, matricula, idade,data,telefone,cpf);
         alunoMod.removerAluno(listAlunos, aluno);
         JOptionPane.showMessageDialog(null,"Aluno de nome:" +aluno.getNome()+" e matricula:"+aluno.getMatricula()+" removido","Removendo Aluno", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ExcluirAluno
 
     private void BuscaMaisVelho(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscaMaisVelho
-        Collections.sort(listAlunos);
+        alunoMod.ordenarListaAluno(listAlunos);
         JOptionPane.showMessageDialog(null, listAlunos.get(listAlunos.size()-1), "Aluno mais Velho", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_BuscaMaisVelho
 
     private void BuscaMaisNovo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscaMaisNovo
-        Collections.sort(listAlunos);
+        alunoMod.ordenarListaAluno(listAlunos);
         JOptionPane.showMessageDialog(null, listAlunos.get(0), "Aluno mais Novo", JOptionPane.INFORMATION_MESSAGE);
-      
     }//GEN-LAST:event_BuscaMaisNovo
 
     private void MostrarLista(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarLista

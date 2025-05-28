@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+package aplicacao_cadastro_alunos;
+
 
 import aplicacao_cadastro_alunos.Aluno;
-import com.mycompany.aplicacao_cadastro_alunos.AlunoDAO;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -14,11 +12,11 @@ import java.util.List;
  *
  * @author joaoa
  */
-public class AlunoDAOimpl implements AlunoDAO{
+public class AlunoDAOimpl implements AlunoDAO1{
     
     @Override
     public boolean isEmpty(List alunos){ //verifica se vazia
-       return alunos == null || alunos.isEmpty();
+       return alunos.isEmpty();
     }
     
     @Override
@@ -28,7 +26,6 @@ public class AlunoDAOimpl implements AlunoDAO{
             System.out.println("Lista Vazia");
             return false; //nao encontrado
         }
-      
         else{
             int i;
             for(i = 0; i < alunos.size(); i++){
@@ -43,17 +40,17 @@ public class AlunoDAOimpl implements AlunoDAO{
            
     }
     
-    public List inserirAluno(List alunos, Aluno alunoInserir){
-       if(verificaExistencia(alunos,alunoInserir)){
-           System.out.println("Aluno existe na lista!");
-       }
+    public void inserirAluno(List alunos, Aluno alunoInserir){
+       if(alunos.contains(alunoInserir)){
+                    System.out.println("Aluno ja existe no sistema");
+                }
        else{
            alunos.add(alunoInserir);
            System.out.println("");
        }
     }
     
-    public List removerAluno(List alunos, Aluno a){
+    public void removerAluno(List alunos, Aluno a){
         for(int i = 0; i<alunos.size(); i++) {
             if(alunos.contains(a)) {
                 alunos.remove(a);
@@ -62,18 +59,20 @@ public class AlunoDAOimpl implements AlunoDAO{
                 throw new RuntimeException("Matricula Invalida");
             }
         }
-        return alunos;
     }
     
-    public List pesquisarAluno(List alunos, String matricula){
-        //fazer esse
+    public void pesquisarAluno(List alunos, String matricula){
+        
+       System.out.print("aaaaa");
     }
     
-    public List BuscaMaisNovo(List alunos){
-    }
-    
-    public List BuscaMaisVelho(List alunos){
-    }
-
+    //TORNAR ESSA SO UMA >> ORDENAR LISTA QUE RECEBE UMA LISTA E ORDENA (NO INTERFACE)
+    public void ordenarListaAluno (List alunos){
+        if(isEmpty(alunos)) {
+            throw new RuntimeException("Lista nao criada ou vazia");
+        }else {
+            Collections.sort(alunos);
+        }
+    }    
     
 }
