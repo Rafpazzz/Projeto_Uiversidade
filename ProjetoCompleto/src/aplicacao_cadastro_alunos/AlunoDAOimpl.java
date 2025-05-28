@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package aplicacao_cadastro_alunos;/*
 =======
 package aplicacao_cadastro_alunos;
@@ -75,18 +74,12 @@ public class AlunoDAOimpl implements AlunoDAO{
         //fazer esse
     }
     
-<<<<<<< HEAD
-    
-    //TORNAR ESSA SO UMA >> ORDENAR LISTA QUE RECEBE UMA LISTA E ORDENA (NO INTERFACE)
-    public List BuscaMaisNovo(List alunos){
-=======
     public void ordenarListaAluno (List alunos){
         if(isEmpty(alunos)) {
             throw new RuntimeException("Lista nao criada ou vazia");
         }else {
             Collections.sort(alunos);
         }
->>>>>>> main
     }
     
     
