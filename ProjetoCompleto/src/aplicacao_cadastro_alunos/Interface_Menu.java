@@ -267,14 +267,13 @@ public class Interface_Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_ExcluirAluno
 
     private void BuscaMaisVelho(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscaMaisVelho
-        Collections.sort(listAlunos);
+        alunoMod.ordenarListaAluno(listAlunos);
         JOptionPane.showMessageDialog(null, listAlunos.get(listAlunos.size()-1), "Aluno mais Velho", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_BuscaMaisVelho
 
     private void BuscaMaisNovo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscaMaisNovo
-        Collections.sort(listAlunos);
+        alunoMod.ordenarListaAluno(listAlunos);
         JOptionPane.showMessageDialog(null, listAlunos.get(0), "Aluno mais Novo", JOptionPane.INFORMATION_MESSAGE);
-      
     }//GEN-LAST:event_BuscaMaisNovo
 
     private void MostrarLista(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarLista
