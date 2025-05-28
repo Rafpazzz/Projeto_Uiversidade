@@ -1,4 +1,4 @@
-/*
+package aplicacao_cadastro_alunos;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -43,7 +43,7 @@ public class AlunoDAOimpl implements AlunoDAO{
            
     }
     
-    public List inserirAluno(List alunos, Aluno alunoInserir){
+    public void inserirAluno(List alunos, Aluno alunoInserir){
        if(verificaExistencia(alunos,alunoInserir)){
            System.out.println("Aluno existe na lista!");
        }
@@ -69,6 +69,8 @@ public class AlunoDAOimpl implements AlunoDAO{
         //fazer esse
     }
     
+    
+    //TORNAR ESSA SO UMA >> ORDENAR LISTA QUE RECEBE UMA LISTA E ORDENA (NO INTERFACE)
     public List BuscaMaisNovo(List alunos){
     }
     

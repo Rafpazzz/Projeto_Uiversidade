@@ -245,7 +245,17 @@ public class Interface_Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InserirAluno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InserirAluno
-
+        String matricula = txtMatricula.getText();
+        String nome = txtNome.getText();
+        String str = txtIdade.getText();
+        Integer idade = Integer.valueOf(str);
+        String data = txtData.getText();
+        String telefone = txtTelefone.getText();
+        String str2 = txtCPF.getText();
+        char[] cpf = str2.toCharArray();
+        
+        Aluno alunoInserir = new Aluno(nome, matricula, idade,data,telefone,cpf);
+        alunoMod.inserirAluno(listAlunos, alunoInserir);
     }//GEN-LAST:event_InserirAluno
 
     private void PesquisarAluno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarAluno
@@ -261,6 +271,7 @@ public class Interface_Menu extends javax.swing.JFrame {
         String telefone = txtTelefone.getText();
         String str2 = txtCPF.getText();
         char[] cpf = str2.toCharArray();
+        
         Aluno aluno = new Aluno(nome, matricula, idade,data,telefone,cpf);
         alunoMod.removerAluno(listAlunos, aluno);
         JOptionPane.showMessageDialog(null,"Aluno de nome:" +aluno.getNome()+" e matricula:"+aluno.getMatricula()+" removido","Removendo Aluno", JOptionPane.INFORMATION_MESSAGE);
