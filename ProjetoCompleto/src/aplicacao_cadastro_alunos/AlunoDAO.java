@@ -16,9 +16,9 @@ import java.util.List;
 public interface AlunoDAO {
     public boolean isEmpty(List alunos);
     public boolean verificaExistencia(List alunos, Aluno a);
-    public List inserirAluno(List alunos, Aluno a);
-    public List removerAluno(List alunos, Aluno a);
-    public List pesquisarAluno(List alunos, String matricula);
+    public void inserirAluno(List alunos, Aluno a);
+    public void removerAluno(List alunos, Aluno a);
+    public void pesquisarAluno(List alunos, String matricula);
     public List BuscaMaisNovo(List alunos);
     public List BuscaMaisVelho(List alunos);
 }
