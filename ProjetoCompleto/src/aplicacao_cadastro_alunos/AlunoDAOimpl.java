@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 package aplicacao_cadastro_alunos;/*
+=======
+package aplicacao_cadastro_alunos;
+
+/*
+>>>>>>> main
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -7,6 +13,7 @@ import aplicacao_cadastro_alunos.Aluno;
 import com.mycompany.aplicacao_cadastro_alunos.AlunoDAO;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -53,7 +60,7 @@ public class AlunoDAOimpl implements AlunoDAO{
        }
     }
     
-    public List removerAluno(List alunos, Aluno a){
+    public void removerAluno(List alunos, Aluno a){
         for(int i = 0; i<alunos.size(); i++) {
             if(alunos.contains(a)) {
                 alunos.remove(a);
@@ -62,20 +69,25 @@ public class AlunoDAOimpl implements AlunoDAO{
                 throw new RuntimeException("Matricula Invalida");
             }
         }
-        return alunos;
     }
     
     public List pesquisarAluno(List alunos, String matricula){
         //fazer esse
     }
     
+<<<<<<< HEAD
     
     //TORNAR ESSA SO UMA >> ORDENAR LISTA QUE RECEBE UMA LISTA E ORDENA (NO INTERFACE)
     public List BuscaMaisNovo(List alunos){
+=======
+    public void ordenarListaAluno (List alunos){
+        if(isEmpty(alunos)) {
+            throw new RuntimeException("Lista nao criada ou vazia");
+        }else {
+            Collections.sort(alunos);
+        }
+>>>>>>> main
     }
     
-    public List BuscaMaisVelho(List alunos){
-    }
-
     
 }
