@@ -15,6 +15,8 @@ import java.util.List;
  */
 public class AlunoDAOimpl implements AlunoDAO1{
     
+    View banco = new View();
+    
     @Override
     public boolean isEmpty(List alunos){ //verifica se vazia
        return alunos.isEmpty();
@@ -43,10 +45,11 @@ public class AlunoDAOimpl implements AlunoDAO1{
     
     public void inserirAluno(List alunos, Aluno alunoInserir){
        if(alunos.contains(alunoInserir)){
-                    System.out.println("Aluno ja existe no sistema");
-                }
+            System.out.println("Aluno ja existe no sistema");
+        }
        else{
            alunos.add(alunoInserir);
+           banco.inserir(banco.conectar(), alunoInserir);
            System.out.println("");
        }
     }
@@ -55,6 +58,7 @@ public class AlunoDAOimpl implements AlunoDAO1{
         for(int i = 0; i<alunos.size(); i++) {
             if(alunos.contains(a)) {
                 alunos.remove(a);
+                banco.remover(banco.conectar(), a.getMatricula());
                 break;
             }else{
                 throw new RuntimeException("Matricula Invalida");
