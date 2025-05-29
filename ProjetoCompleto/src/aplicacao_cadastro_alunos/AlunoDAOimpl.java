@@ -1,23 +1,19 @@
-<<<<<<< HEAD
-package aplicacao_cadastro_alunos;/*
-=======
-=======
->>>>>>> main
+
 package aplicacao_cadastro_alunos;
 
-
-import aplicacao_cadastro_alunos.Aluno;
-
+import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import javax.swing.JTextArea;
+
 
 /**
  *
  * @author joaoa
  */
-public class AlunoDAOimpl implements AlunoDAO1{
+public class AlunoDAOimpl implements AlunoDAO{
     
     @Override
     public boolean isEmpty(List alunos){ //verifica se vazia
@@ -28,8 +24,8 @@ public class AlunoDAOimpl implements AlunoDAO1{
     public boolean verificaExistencia(List alunos,Aluno AlunoVerificar){
         
         if(isEmpty(alunos)){
-            System.out.println("Lista Vazia");
-            return false; //nao encontrado
+            JOptionPane.showMessageDialog(null,"Mensagem de Erro" ,"A lista está vazia, nao foi possivel concluir sua operação",JOptionPane.ERROR_MESSAGE);
+            return false; 
         }
         else{
             int i;
@@ -39,7 +35,7 @@ public class AlunoDAOimpl implements AlunoDAO1{
                     return true;
                 }
             }
-            
+            JOptionPane.showMessageDialog(null,"Notificação do Sistema","Aluno não encontrado na lista",JOptionPane.ERROR_MESSAGE);
             return false;
         }
            
@@ -47,11 +43,11 @@ public class AlunoDAOimpl implements AlunoDAO1{
     
     public void inserirAluno(List alunos, Aluno alunoInserir){
        if(alunos.contains(alunoInserir)){
-                    System.out.println("Aluno ja existe no sistema");
-                }
+           JOptionPane.showMessageDialog(null,"Esse Aluno ja existe no sistema!","Notificação do Sistema",JOptionPane.ERROR_MESSAGE);
+       }
        else{
            alunos.add(alunoInserir);
-           System.out.println("");
+           JOptionPane.showMessageDialog(null, "Aluno adicionado com sucesso!");
        }
     }
     
@@ -59,33 +55,36 @@ public class AlunoDAOimpl implements AlunoDAO1{
         for(int i = 0; i<alunos.size(); i++) {
             if(alunos.contains(a)) {
                 alunos.remove(a);
+                JOptionPane.showMessageDialog(null, "Aluno removido com sucesso!");
                 break;
             }else{
-                throw new RuntimeException("Matricula Invalida");
+                JOptionPane.showMessageDialog(null,"MENSAGEM DE ERRO","Não foi possível deletar pois, o aluno não foi encontrado na lista.",JOptionPane.ERROR_MESSAGE);
             }
         }
     }
     
-    public void pesquisarAluno(List alunos, String matricula){
-        
-       System.out.print("aaaaa");
+    public void pesquisarAluno(List alunos, Aluno alunoPesquisar,JTextArea resultadoArea){
+        if(verificaExistencia(alunos, alunoPesquisar)){
+            resultadoArea.setText("Aluno encontrado!\n");
+            resultadoArea.append("Nome: " + alunoPesquisar.getNome() + "\n");
+            resultadoArea.append("Matrícula: " + alunoPesquisar.getMatricula() + "\n");
+        }
+        else {
+           JOptionPane.showMessageDialog(null,"MENSAGEM DE ERRO","Não ha resultados para sua busca. Tente inserir um aluno que está na lista!",JOptionPane.ERROR_MESSAGE);
+        } 
     }
     
-<<<<<<< HEAD
-=======
-    //TORNAR ESSA SO UMA >> ORDENAR LISTA QUE RECEBE UMA LISTA E ORDENA (NO INTERFACE)
->>>>>>> main
-    public void ordenarListaAluno (List alunos){
+    public void ordenarListaAluno(List alunos){
         if(isEmpty(alunos)) {
-            throw new RuntimeException("Lista nao criada ou vazia");
+           JOptionPane.showMessageDialog(null,"MENSAGEM DE ERRO","Voce tentou efetuar uma busca em uma lista vazia",JOptionPane.ERROR_MESSAGE);
         }else {
             Collections.sort(alunos);
         }
-<<<<<<< HEAD
     }
+
+
     
-=======
-    }    
->>>>>>> main
+ }    
+
     
-}
+

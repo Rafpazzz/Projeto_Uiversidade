@@ -10,6 +10,9 @@ import aplicacao_cadastro_alunos.Aluno;
 import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import java.util.Comparator;
+
 
 /**
  *
@@ -18,6 +21,7 @@ import javax.swing.JOptionPane;
 public class Interface_Menu extends javax.swing.JFrame {
     List<Aluno> listAlunos = new ArrayList<>();
     AlunoDAOimpl alunoMod = new AlunoDAOimpl();
+   // Comparator<Aluno> comparadorIdade = new Comparator<Aluno>();
     File file = new File("armazena.csv");
     /**
      * Creates new form Interface_Menu
@@ -244,6 +248,7 @@ public class Interface_Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //FUNCIONANDO 100%
     private void InserirAluno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InserirAluno
         String matricula = txtMatricula.getText();
         String nome = txtNome.getText();
@@ -259,7 +264,21 @@ public class Interface_Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_InserirAluno
 
     private void PesquisarAluno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarAluno
-        // TODO add your handling code here:
+        String matricula = txtMatricula.getText();
+        String nome = txtNome.getText();
+        String str = txtIdade.getText();
+        Integer idade = Integer.valueOf(str);
+        String data = txtData.getText();
+        String telefone = txtTelefone.getText();
+        String str2 = txtCPF.getText();
+        char[] cpf = str2.toCharArray();
+                
+        JTextArea resultadoArea = new JTextArea();
+        resultadoArea.setEditable(false);
+        Aluno alunoPesquisar = new Aluno(nome, matricula, idade,data,telefone,cpf);
+        
+    // Depois, quando for pesquisar:
+        alunoMod.pesquisarAluno(listAlunos, alunoPesquisar, resultadoArea);
     }//GEN-LAST:event_PesquisarAluno
 
     private void ExcluirAluno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirAluno
@@ -309,30 +328,7 @@ public class Interface_Menu extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Interface_Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Interface_Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Interface_Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interface_Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+ 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Interface_Menu().setVisible(true);
