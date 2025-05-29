@@ -2,6 +2,7 @@ package aplicacao_cadastro_alunos;
 
 
 import aplicacao_cadastro_alunos.Aluno;
+import aplicacao_cadastro_alunos.View;
 
 import java.util.ArrayList;
 import java.util.Collections;
