@@ -334,12 +334,8 @@ public class Interface_Menu extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        try {
-        Class.forName("com.mysql.jdbc.Driver");
-        //Connection conexao = DriverMEnengere
-    }catch(ClassNotFoundException e){
-        System.out.println("Driver de banco nao localizado");
-    }
+        
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Interface_Menu().setVisible(true);

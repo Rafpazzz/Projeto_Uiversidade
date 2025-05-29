@@ -12,7 +12,7 @@ import java.sql.*;
  * @author Raf
  */
 public class View {
-    public static Connection conectar() {
+    public Connection conectar() {
         Connection conecxao = null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -31,18 +31,21 @@ public class View {
         return conecxao;
     }
     
-    public static void inserir(Connection conn, String matricula, String nome, int idade, String data, String telefone ,char[] cpf) {
+    public void inserir(Connection conn, Aluno aluno) {
         try {
             if(conn != null) {
                 String sql = "INSERT INTO ALUNO (MATRICULA, NOME, IDADE, DT_NAS,TELEFONE,CPF) VELUES(?,?,?,?,?,?)";
                 
                 PreparedStatement stm = conn.prepareStatement(sql);
-                stm.setString(1,matricula);
-                stm.setString(2,nome);
-                stm.setString(3,String.valueOf(idade));
-                stm.setString(3, data);
-                stm.setString(4, telefone);
-                stm.setString(5, String.valueOf(cpf));
+                stm.setString(1,aluno.getMatricula());
+                stm.setString(2,aluno.getNome());
+                stm.setString(3,String.valueOf(aluno.getIdade()));
+                stm.setString(3, aluno.getData());
+                stm.setString(4, aluno.getTelefone());
+                stm.setString(5, String.valueOf(aluno.getCpf()));
+                
+                int linhasAfetadas = stm.executeUpdate();
+                System.out.println("Inserção realizada com sucesso. Linhas afetadas: " + linhasAfetadas);
                 
                 stm.close();
                 conn.close();
@@ -52,7 +55,7 @@ public class View {
         }
     }
     
-    public static void remover(Connection conn, String matricula) {
+    public void remover(Connection conn, String matricula) {
         String sql = "DELETE FROM ALUNO WHERE MATRICULA = ?";
         
         try (PreparedStatement stm = conn.prepareStatement(sql)) {
@@ -63,28 +66,4 @@ public class View {
             e.printStackTrace();
         }
     }
-    
-    /*
-        Connection conn = Test02.conectar();
-
-        try {
-            if (conn != null){
-                 String sql = "INSERT INTO ALUNO (MATRICULA, NOME) VALUES(?,?)";
-                 
-                PreparedStatement stm = conn.prepareStatement(sql);
-                stm.setString(1, "123");
-                stm.setString(2, "Rafael");
-                
-                int linhasAfetadas = stm.executeUpdate();
-                System.out.println("Inserção realizada com sucesso. Linhas afetadas: " + linhasAfetadas);
-                
-                stm.close();
-                conn.close();
-            } 
-                
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    */
-    
 }
