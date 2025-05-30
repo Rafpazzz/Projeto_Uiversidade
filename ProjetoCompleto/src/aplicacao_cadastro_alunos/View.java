@@ -34,15 +34,15 @@ public class View {
     public void inserir(Connection conn, Aluno aluno) {
         try {
             if(conn != null) {
-                String sql = "INSERT INTO ALUNO (MATRICULA, NOME, IDADE, DT_NAS,TELEFONE,CPF) VELUES(?,?,?,?,?,?)";
+                String sql = "INSERT INTO ALUNO (MATRICULA, NOME, IDADE, DT_NAS,TELEFONE,CPF) VALUES(?,?,?,?,?,?)";
                 
                 PreparedStatement stm = conn.prepareStatement(sql);
                 stm.setString(1,aluno.getMatricula());
                 stm.setString(2,aluno.getNome());
                 stm.setString(3,String.valueOf(aluno.getIdade()));
-                stm.setString(3, aluno.getData());
-                stm.setString(4, aluno.getTelefone());
-                stm.setString(5, String.valueOf(aluno.getCpf()));
+                stm.setString(4,String.valueOf(aluno.getData()));
+                stm.setString(5, aluno.getTelefone());
+                stm.setString(6, String.valueOf(aluno.getCpf()));
                 
                 int linhasAfetadas = stm.executeUpdate();
                 System.out.println("Inserção realizada com sucesso. Linhas afetadas: " + linhasAfetadas);
