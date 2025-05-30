@@ -6,6 +6,8 @@ package aplicacao_cadastro_alunos;
  */
 
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
@@ -18,12 +20,12 @@ public class Aluno implements Comparable<Aluno>{
     private String nome;
     private String matricula;
     private int idade;
-    private String data;
+    private LocalDate data;
     private String telefone;
     private char[] cpf = new char [11];
     public static final Scanner read = new Scanner(System.in);
     
-    public Aluno(String nome, String matricula, int idade, String data, String telefone, char[] cpf){
+    public Aluno(String nome, String matricula, int idade, LocalDate data, String telefone, char[] cpf){
         this.nome = nome;
         this.matricula = matricula;
         this.idade = idade;
@@ -91,11 +93,11 @@ public class Aluno implements Comparable<Aluno>{
         this.idade = idade;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
