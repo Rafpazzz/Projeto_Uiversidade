@@ -8,11 +8,18 @@ package aplicacao_cadastro_alunos;
 
 import aplicacao_cadastro_alunos.Aluno;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import javax.swing.JOptionPane;
+<<<<<<< HEAD
 import javax.swing.JTextArea;
 import java.util.Comparator;
 
+=======
+import javax.swing.table.DefaultTableModel;
+>>>>>>> main
 
 /**
  *
@@ -23,6 +30,8 @@ public class Interface_Menu extends javax.swing.JFrame {
     AlunoDAOimpl alunoMod = new AlunoDAOimpl();
    // Comparator<Aluno> comparadorIdade = new Comparator<Aluno>();
     File file = new File("armazena.csv");
+    ListAlunos list = new ListAlunos();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     
     /**
      * Creates new form Interface_Menu
@@ -253,9 +262,8 @@ public class Interface_Menu extends javax.swing.JFrame {
     private void InserirAluno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InserirAluno
         String matricula = txtMatricula.getText();
         String nome = txtNome.getText();
-        String str = txtIdade.getText();
-        Integer idade = Integer.valueOf(str);
-        String data = txtData.getText();
+        LocalDate data = LocalDate.parse(txtData.getText(), formatter);
+        Integer idade = calcularIdade(data);
         String telefone = txtTelefone.getText();
         String str2 = txtCPF.getText();
         char[] cpf = str2.toCharArray();
@@ -283,11 +291,10 @@ public class Interface_Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_PesquisarAluno
 
     private void ExcluirAluno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirAluno
-        String matricula = txtMatricula.getText();
+       String matricula = txtMatricula.getText();
         String nome = txtNome.getText();
-        String str = txtIdade.getText();
-        Integer idade = Integer.valueOf(str);
-        String data = txtData.getText();
+        LocalDate data = LocalDate.parse(txtData.getText(), formatter);
+        Integer idade = calcularIdade(data);
         String telefone = txtTelefone.getText();
         String str2 = txtCPF.getText();
         char[] cpf = str2.toCharArray();
@@ -308,7 +315,10 @@ public class Interface_Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_BuscaMaisNovo
 
     private void MostrarLista(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarLista
-        JOptionPane.showMessageDialog(null, listAlunos.toString(),"Lista de Alunos Cadastrados", JOptionPane.INFORMATION_MESSAGE);
+        list.setVisible(true);
+        list.carregaTabela(listAlunos);
+       
+//JOptionPane.showMessageDialog(null, listAlunos.toString(),"Lista de Alunos Cadastrados", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_MostrarLista
 
     private void salvarArquivo(File file, Aluno aluno){
@@ -324,6 +334,15 @@ public class Interface_Menu extends javax.swing.JFrame {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }        
+    }
+    
+    public static int calcularIdade(LocalDate dataNascimento) {
+        if (dataNascimento == null) {
+            throw new IllegalArgumentException("Data de nascimento não pode ser nula.");
+        }
+
+        LocalDate hoje = LocalDate.now();
+        return Period.between(dataNascimento, hoje).getYears();
     }
     /**
      * @param args the command line arguments
