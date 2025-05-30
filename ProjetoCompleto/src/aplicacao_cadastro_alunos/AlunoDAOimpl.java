@@ -1,20 +1,14 @@
 
 package aplicacao_cadastro_alunos;
 
-<<<<<<< HEAD
 import javax.swing.JOptionPane;
-=======
-
 import aplicacao_cadastro_alunos.Aluno;
 import aplicacao_cadastro_alunos.View;
-
->>>>>>> main
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import javax.swing.JTextArea;
-
 
 /**
  *
@@ -52,20 +46,12 @@ public class AlunoDAOimpl implements AlunoDAO{
     
     public void inserirAluno(List alunos, Aluno alunoInserir){
        if(alunos.contains(alunoInserir)){
-<<<<<<< HEAD
            JOptionPane.showMessageDialog(null,"Esse Aluno ja existe no sistema!","Notificação do Sistema",JOptionPane.ERROR_MESSAGE);
        }
        else{
            alunos.add(alunoInserir);
-           JOptionPane.showMessageDialog(null, "Aluno adicionado com sucesso!");
-=======
-            System.out.println("Aluno ja existe no sistema");
-        }
-       else{
-           alunos.add(alunoInserir);
            banco.inserir(banco.conectar(), alunoInserir);
-           System.out.println("");
->>>>>>> main
+           JOptionPane.showMessageDialog(null, "Aluno adicionado com sucesso!");
        }
     }
     
@@ -73,11 +59,8 @@ public class AlunoDAOimpl implements AlunoDAO{
         for(int i = 0; i<alunos.size(); i++) {
             if(alunos.contains(a)) {
                 alunos.remove(a);
-<<<<<<< HEAD
                 JOptionPane.showMessageDialog(null, "Aluno removido com sucesso!");
-=======
                 banco.remover(banco.conectar(), a.getMatricula());
->>>>>>> main
                 break;
             }else{
                 JOptionPane.showMessageDialog(null,"MENSAGEM DE ERRO","Não foi possível deletar pois, o aluno não foi encontrado na lista.",JOptionPane.ERROR_MESSAGE);
@@ -103,9 +86,6 @@ public class AlunoDAOimpl implements AlunoDAO{
             Collections.sort(alunos);
         }
     }
-
-
-    
  }    
 
     
