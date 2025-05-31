@@ -19,7 +19,7 @@ public class View {
             
             String url = "jdbc:mysql://localhost:3306/escola";
             String usuario = "root";
-            String senha = "12345";
+            String senha = " ";
             
             conecxao = DriverManager.getConnection(url,usuario,senha);
             System.out.println("Conectado dom sucesso");
