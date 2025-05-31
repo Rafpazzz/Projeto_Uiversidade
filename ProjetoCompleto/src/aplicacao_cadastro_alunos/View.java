@@ -19,7 +19,7 @@ public class View {
             
             String url = "jdbc:mysql://localhost:3306/escola";
             String usuario = "root";
-            String senha = " ";
+            String senha = "12345";
             
             conecxao = DriverManager.getConnection(url,usuario,senha);
             System.out.println("Conectado dom sucesso");
@@ -34,7 +34,7 @@ public class View {
     public void inserir(Connection conn, Aluno aluno) {
         try {
             if(conn != null) {
-                String sql = "INSERT INTO ALUNO (MATRICULA, NOME, IDADE, DT_NAS,TELEFONE,CPF) VALUES(?,?,?,?,?,?)";
+                String sql = "INSERT INTO ALUNO (MATRICULA, NOME, IDADE, DATANAS,TELEFONE,CPF) VALUES(?,?,?,?,?,?)";
                 
                 PreparedStatement stm = conn.prepareStatement(sql);
                 stm.setString(1,aluno.getMatricula());
