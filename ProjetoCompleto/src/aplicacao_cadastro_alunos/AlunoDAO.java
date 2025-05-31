@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package aplicacao_cadastro_alunos;
+import java.time.LocalDate;
 import java.util.List;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
@@ -19,9 +20,12 @@ import javax.swing.JTextArea;
  */
 interface AlunoDAO {
     public boolean isEmpty(List alunos);
+    public boolean validarData(String data);
+    public boolean verificaPreenchimento(String matricula, String nome, String telefone, String cpf);
+    public int calcularIdade(LocalDate dataNascimento);
     public boolean verificaExistencia(List alunos,Aluno AlunoVerificar);
     public void inserirAluno(List alunos, Aluno alunoInserir);
-    public void removerAluno(List alunos, Aluno a);
-    public void pesquisarAluno(List alunos, Aluno a,JTextArea resultadoArea);
+    public void removerAluno(List<Aluno> alunos, String matricula);
+    public Aluno pesquisarAluno(List<Aluno> alunos, String matricula);
     public void ordenarListaAluno (List alunos);
 }

@@ -7,19 +7,18 @@ package aplicacao_cadastro_alunos;
 
 
 import aplicacao_cadastro_alunos.Aluno;
+import java.awt.Dimension;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import javax.swing.JOptionPane;
-<<<<<<< HEAD
 import javax.swing.JTextArea;
 import java.util.Comparator;
-
-=======
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
->>>>>>> main
 
 /**
  *
@@ -66,14 +65,12 @@ public class Interface_Menu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtData = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtCPF = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtTelefone = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtIdade = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        txtData = new javax.swing.JFormattedTextField();
+        txtTelefone = new javax.swing.JFormattedTextField();
+        txtCPF = new javax.swing.JFormattedTextField();
 
         jMenu1.setText("jMenu1");
 
@@ -102,7 +99,7 @@ public class Interface_Menu extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Pesquisar Aluno");
+        jButton2.setText("Pesquisar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PesquisarAluno(evt);
@@ -148,7 +145,23 @@ public class Interface_Menu extends javax.swing.JFrame {
 
         jLabel6.setText("CPF");
 
-        jLabel7.setText("IDADE");
+        try {
+            txtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-## ")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -160,41 +173,21 @@ public class Interface_Menu extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(12, 12, 12))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
-                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCPF)
-                                    .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCPF)
+                                .addGap(52, 52, 52))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -203,6 +196,24 @@ public class Interface_Menu extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtMatricula)
                                     .addComponent(txtNome))))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(54, 54, 54)))
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4)
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -220,16 +231,14 @@ public class Interface_Menu extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
+                    .addComponent(jLabel6)
                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -260,58 +269,159 @@ public class Interface_Menu extends javax.swing.JFrame {
 
     //FUNCIONANDO 100%
     private void InserirAluno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InserirAluno
-        String matricula = txtMatricula.getText();
-        String nome = txtNome.getText();
-        LocalDate data = LocalDate.parse(txtData.getText(), formatter);
-        Integer idade = calcularIdade(data);
-        String telefone = txtTelefone.getText();
-        String str2 = txtCPF.getText();
+        
+        //verifica se algum campo ficou vazio
+       if(!alunoMod.verificaPreenchimento(txtMatricula.getText(), txtNome.getText(), txtTelefone.getText(), txtCPF.getText())){
+            return;
+       }
+        
+        
+        String matricula = txtMatricula.getText().trim(); //trim tira espacos em branco
+        String nome = txtNome.getText().trim();
+        String telefone = txtTelefone.getText().trim();
+        String str2 = txtCPF.getText().trim();
         char[] cpf = str2.toCharArray();
         
-        Aluno alunoInserir = new Aluno(nome, matricula, idade,data,telefone,cpf);
+        int idade = 0;
+        LocalDate dataValidada = null;
+        
+        //verifica se a data foi adicionada certo
+        String dataVerifica = txtData.getText();
+        
+        if(alunoMod.validarData(dataVerifica)){
+          dataValidada = LocalDate.parse(txtData.getText(), formatter);
+          idade = alunoMod.calcularIdade(dataValidada);
+        }
+        else{
+          JOptionPane.showMessageDialog(null, "Data inválida! Por favor corrija.");
+          txtData.requestFocus(); //o teclado volta para o local a ser alterado
+          return; //impede do codigo ser executado
+        }
+        
+        Aluno alunoInserir = new Aluno(nome, matricula, idade,dataValidada,telefone,cpf);
         alunoMod.inserirAluno(listAlunos, alunoInserir);
+        
+        // Limpa os campos após inserção
+        txtMatricula.setText("");
+        txtNome.setText("");
+        txtTelefone.setText("");
+        txtCPF.setText("");
+        txtData.setText("");
+        
+        txtMatricula.requestFocus(); // a agulha de  digitação vai para o primeiro
     }//GEN-LAST:event_InserirAluno
 
     private void PesquisarAluno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarAluno
-        String matricula = txtMatricula.getText();
-        String nome = txtNome.getText();
-        String str = txtIdade.getText();
-        Integer idade = Integer.valueOf(str);
-        String data = txtData.getText();
-        String telefone = txtTelefone.getText();
-        String str2 = txtCPF.getText();
-        char[] cpf = str2.toCharArray();
-                
-        JTextArea resultadoArea = new JTextArea();
-        resultadoArea.setEditable(false);
-        Aluno alunoPesquisar = new Aluno(nome, matricula, idade,data,telefone,cpf);
-        
-    // Depois, quando for pesquisar:
-        alunoMod.pesquisarAluno(listAlunos, alunoPesquisar, resultadoArea);
+      String matriculaPesquisa = JOptionPane.showInputDialog(null, "Digite a matrícula do aluno:", "Pesquisa de Aluno", JOptionPane.QUESTION_MESSAGE);
+
+        if (matriculaPesquisa != null && !matriculaPesquisa.trim().isEmpty()) {
+            Aluno alunoEncontrado = alunoMod.pesquisarAluno(listAlunos, matriculaPesquisa.trim());
+
+            if (alunoEncontrado != null) {
+                // Cria tabela só com esse aluno
+                Object[][] dados = {
+                    {
+                        alunoEncontrado.getMatricula(),
+                        alunoEncontrado.getNome(),
+                        alunoEncontrado.getData(),
+                        alunoEncontrado.getIdade(),
+                        alunoEncontrado.getTelefone(),
+                        String.valueOf(alunoEncontrado.getCpf())
+                    }
+                };
+
+                String[] colunas = {"Matrícula", "Nome", "Data de Nascimento", "Idade", "Telefone", "CPF"};
+
+                JTable tabelaResultado = new JTable(dados, colunas);
+                JScrollPane scrollPane = new JScrollPane(tabelaResultado);
+                scrollPane.setPreferredSize(new Dimension(500, 70));
+                JOptionPane.showMessageDialog(null, scrollPane, "Resultado da Pesquisa", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Aluno não encontrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Matrícula não informada!", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_PesquisarAluno
 
     private void ExcluirAluno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirAluno
-       String matricula = txtMatricula.getText();
-        String nome = txtNome.getText();
-        LocalDate data = LocalDate.parse(txtData.getText(), formatter);
-        Integer idade = calcularIdade(data);
-        String telefone = txtTelefone.getText();
-        String str2 = txtCPF.getText();
-        char[] cpf = str2.toCharArray();
+        String matriculaExcluir = JOptionPane.showInputDialog(null, "Digite a matrícula do aluno que deseja excluir:");
         
-        Aluno aluno = new Aluno(nome, matricula, idade,data,telefone,cpf);
-        alunoMod.removerAluno(listAlunos, aluno);
-        JOptionPane.showMessageDialog(null,"Aluno de nome:" +aluno.getNome()+" e matricula:"+aluno.getMatricula()+" removido","Removendo Aluno", JOptionPane.INFORMATION_MESSAGE);
+        if (matriculaExcluir != null && !matriculaExcluir.trim().isEmpty()) {
+            alunoMod.removerAluno(listAlunos, matriculaExcluir.trim());
+        }
     }//GEN-LAST:event_ExcluirAluno
 
     private void BuscaMaisVelho(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscaMaisVelho
+        //Verifica se a lista de alunos não está vazia
+        if (listAlunos == null || listAlunos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "A lista de alunos está vazia.", "Nenhum Aluno Encontrado", JOptionPane.INFORMATION_MESSAGE);
+            return; // Sai da função se não houver alunos
+        }
+
         alunoMod.ordenarListaAluno(listAlunos);
-        JOptionPane.showMessageDialog(null, listAlunos.get(listAlunos.size()-1), "Aluno mais Velho", JOptionPane.INFORMATION_MESSAGE);
+
+        Aluno alunoMaisVelho = listAlunos.get(listAlunos.size() - 1);
+
+       
+        Object[][] dados = {
+            {
+                alunoMaisVelho.getMatricula(),
+                alunoMaisVelho.getNome(),
+                alunoMaisVelho.getData(), 
+                alunoMaisVelho.getIdade(),
+                alunoMaisVelho.getTelefone(),
+                String.valueOf(alunoMaisVelho.getCpf()) 
+            }
+        };
+
+        
+        String[] colunas = {"Matrícula", "Nome", "Data de Nascimento", "Idade", "Telefone", "CPF"};
+
+ 
+        JTable tabelaResultado = new JTable(dados, colunas);
+   
+        tabelaResultado.setEnabled(false);
+        tabelaResultado.getTableHeader().setReorderingAllowed(false);
+        tabelaResultado.getTableHeader().setResizingAllowed(false);
+
+        JScrollPane scrollPane = new JScrollPane(tabelaResultado);
+        scrollPane.setPreferredSize(new Dimension(650, 70));
+
+       
+        JOptionPane.showMessageDialog(null, scrollPane, "Aluno Mais Velho", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_BuscaMaisVelho
 
     private void BuscaMaisNovo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscaMaisNovo
+        if (listAlunos == null || listAlunos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "A lista de alunos está vazia.", "Nenhum Aluno Encontrado", JOptionPane.INFORMATION_MESSAGE);
+            return; // Sai da função se não houver alunos
+        }
+        
         alunoMod.ordenarListaAluno(listAlunos);
-        JOptionPane.showMessageDialog(null, listAlunos.get(0), "Aluno mais Novo", JOptionPane.INFORMATION_MESSAGE);
+        Aluno alunoMaisNovo = listAlunos.get(0);
+        
+        Object[][] dados = {
+            {
+                alunoMaisNovo.getMatricula(),
+                alunoMaisNovo.getNome(),
+                alunoMaisNovo.getData(), // Assumindo que getData() retorna uma String ou é formatado adequadamente
+                alunoMaisNovo.getIdade(),
+                alunoMaisNovo.getTelefone(),
+                String.valueOf(alunoMaisNovo.getCpf()) // Converte o CPF para String
+            }
+        };
+
+        String[] colunas = {"Matrícula", "Nome", "Data de Nascimento", "Idade", "Telefone", "CPF"};
+        JTable tabelaResultado = new JTable(dados, colunas);
+        tabelaResultado.setEnabled(false);
+        tabelaResultado.getTableHeader().setReorderingAllowed(false);
+        tabelaResultado.getTableHeader().setResizingAllowed(false);
+        JScrollPane scrollPane = new JScrollPane(tabelaResultado);
+        scrollPane.setPreferredSize(new Dimension(650, 70));
+        
+        JOptionPane.showMessageDialog(null, scrollPane, "Aluno Mais Novo", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_BuscaMaisNovo
 
     private void MostrarLista(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarLista
@@ -321,6 +431,8 @@ public class Interface_Menu extends javax.swing.JFrame {
 //JOptionPane.showMessageDialog(null, listAlunos.toString(),"Lista de Alunos Cadastrados", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_MostrarLista
 
+
+    
     private void salvarArquivo(File file, Aluno aluno){
        try (FileWriter fw = new FileWriter(file, true); BufferedWriter bw = new BufferedWriter(fw)) {
                         if (!listAlunos.contains(aluno)) {
@@ -336,14 +448,6 @@ public class Interface_Menu extends javax.swing.JFrame {
                     }        
     }
     
-    public static int calcularIdade(LocalDate dataNascimento) {
-        if (dataNascimento == null) {
-            throw new IllegalArgumentException("Data de nascimento não pode ser nula.");
-        }
-
-        LocalDate hoje = LocalDate.now();
-        return Period.between(dataNascimento, hoje).getYears();
-    }
     /**
      * @param args the command line arguments
      */
@@ -372,15 +476,14 @@ public class Interface_Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtCPF;
-    private javax.swing.JTextField txtData;
-    private javax.swing.JTextField txtIdade;
+    private javax.swing.JFormattedTextField txtCPF;
+    private javax.swing.JFormattedTextField txtData;
     private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtTelefone;
+    private javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
+
 }

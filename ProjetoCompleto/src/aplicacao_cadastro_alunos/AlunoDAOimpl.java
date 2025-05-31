@@ -9,6 +9,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import javax.swing.JTextArea;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 
 /**
  *
@@ -19,6 +23,30 @@ public class AlunoDAOimpl implements AlunoDAO{
     View banco = new View();
     
     @Override
+    public boolean validarData(String data) {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    sdf.setLenient(false);  // Não permite datas inválidas
+
+        try {
+            sdf.parse(data);
+            return true;  // Data válida
+        } catch (ParseException e) {
+            return false;  // Data inválida
+        }
+    } 
+    
+    @Override
+    public int calcularIdade(LocalDate dataNascimento) {
+        if (dataNascimento == null) {
+            JOptionPane.showMessageDialog(null,"Preencha o campo 'Data de nascimento!' " ,"Mensagem de Erro",JOptionPane.ERROR_MESSAGE);
+        }
+
+        LocalDate hoje = LocalDate.now();
+        return Period.between(dataNascimento, hoje).getYears();
+    }
+    
+    
+    @Override
     public boolean isEmpty(List alunos){ //verifica se vazia
        return alunos.isEmpty();
     }
@@ -27,7 +55,7 @@ public class AlunoDAOimpl implements AlunoDAO{
     public boolean verificaExistencia(List alunos,Aluno AlunoVerificar){
         
         if(isEmpty(alunos)){
-            JOptionPane.showMessageDialog(null,"Mensagem de Erro" ,"A lista está vazia, nao foi possivel concluir sua operação",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"A lista está vazia! Não foi possivel concluir sua operação." ,"Mensagem de Erro",JOptionPane.ERROR_MESSAGE);
             return false; 
         }
         else{
@@ -38,12 +66,40 @@ public class AlunoDAOimpl implements AlunoDAO{
                     return true;
                 }
             }
-            JOptionPane.showMessageDialog(null,"Notificação do Sistema","Aluno não encontrado na lista",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Aluno não encontrado na lista","Notificação do Sistema",JOptionPane.ERROR_MESSAGE);
             return false;
         }
-           
+        
     }
     
+    @Override
+    public boolean verificaPreenchimento(String matricula, String nome, String telefone, String cpf) {
+        if (matricula == null || matricula.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, preencha a matrícula.");
+            return false;
+        }
+
+        if (nome == null || telefone.replaceAll("[^0-9]", "").isEmpty()) { // remove tudo que não for número. Se sobrar nada → está vazio!
+            JOptionPane.showMessageDialog(null, "Por favor, preencha o nome.");
+            return false;
+        }
+
+        if (telefone == null || telefone.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, preencha o telefone.");
+            return false;
+        }
+
+        if (cpf == null || cpf.replaceAll("[^0-9]", "").isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, preencha o CPF.");
+            return false;
+        }
+
+        return true;  // Tudo preenchido corretamente
+    }
+    
+    
+    
+    @Override
     public void inserirAluno(List alunos, Aluno alunoInserir){
        if(alunos.contains(alunoInserir)){
            JOptionPane.showMessageDialog(null,"Esse Aluno ja existe no sistema!","Notificação do Sistema",JOptionPane.ERROR_MESSAGE);
@@ -55,30 +111,37 @@ public class AlunoDAOimpl implements AlunoDAO{
        }
     }
     
-    public void removerAluno(List alunos, Aluno a){
-        for(int i = 0; i<alunos.size(); i++) {
-            if(alunos.contains(a)) {
-                alunos.remove(a);
-                JOptionPane.showMessageDialog(null, "Aluno removido com sucesso!");
-                banco.remover(banco.conectar(), a.getMatricula());
+    @Override
+    public void removerAluno(List<Aluno> alunos, String matricula) {
+        Aluno alunoParaRemover = null;
+        for (int i = 0; i < alunos.size(); i++) {
+            Aluno a = alunos.get(i);
+            if (a.getMatricula().equals(matricula)) {
+                alunoParaRemover = a;
                 break;
-            }else{
-                JOptionPane.showMessageDialog(null,"MENSAGEM DE ERRO","Não foi possível deletar pois, o aluno não foi encontrado na lista.",JOptionPane.ERROR_MESSAGE);
             }
         }
-    }
-    
-    public void pesquisarAluno(List alunos, Aluno alunoPesquisar,JTextArea resultadoArea){
-        if(verificaExistencia(alunos, alunoPesquisar)){
-            resultadoArea.setText("Aluno encontrado!\n");
-            resultadoArea.append("Nome: " + alunoPesquisar.getNome() + "\n");
-            resultadoArea.append("Matrícula: " + alunoPesquisar.getMatricula() + "\n");
+        if (alunoParaRemover != null) {
+            alunos.remove(alunoParaRemover);
+            JOptionPane.showMessageDialog(null, "Aluno removido com sucesso!");
+            banco.remover(banco.conectar(), alunoParaRemover.getMatricula());
+        } else {
+            JOptionPane.showMessageDialog(null, "Aluno não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
-        else {
-           JOptionPane.showMessageDialog(null,"MENSAGEM DE ERRO","Não ha resultados para sua busca. Tente inserir um aluno que está na lista!",JOptionPane.ERROR_MESSAGE);
-        } 
     }
+
     
+    @Override
+    public Aluno pesquisarAluno(List<Aluno> alunos, String matricula) {
+        for (int i = 0; i < alunos.size(); i++) {
+            if (alunos.get(i).getMatricula().equalsIgnoreCase(matricula)) {
+                return alunos.get(i);
+            }
+        }
+        return null; // Não encontrou
+    }
+
+    @Override
     public void ordenarListaAluno(List alunos){
         if(isEmpty(alunos)) {
            JOptionPane.showMessageDialog(null,"MENSAGEM DE ERRO","Voce tentou efetuar uma busca em uma lista vazia",JOptionPane.ERROR_MESSAGE);
