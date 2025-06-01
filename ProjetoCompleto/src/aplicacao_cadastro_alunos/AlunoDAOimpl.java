@@ -4,9 +4,13 @@ package aplicacao_cadastro_alunos;
 import javax.swing.JOptionPane;
 import aplicacao_cadastro_alunos.Aluno;
 import aplicacao_cadastro_alunos.View;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -116,6 +120,19 @@ public class AlunoDAOimpl implements AlunoDAO{
        }
     }
     
+    public void inserirEmPosicao(List alunos, Aluno alunoInserir, String posicao) {
+        if(alunos.contains(alunoInserir)){
+           JOptionPane.showMessageDialog(null,"Esse Aluno ja existe no sistema!","Notificação do Sistema",JOptionPane.ERROR_MESSAGE);
+       }
+       else{
+           Integer pos = Integer.parseInt(posicao);
+           alunos.add(pos, alunoInserir);
+           banco.inserir(banco.conectar(), alunoInserir);
+           salvarArquivo(file, alunoInserir);
+           JOptionPane.showMessageDialog(null, "Aluno adicionado com sucesso!");
+       }
+    }
+    
     @Override
     public void removerAluno(List<Aluno> alunos, String matricula) {
         Aluno alunoParaRemover = null;
@@ -130,6 +147,7 @@ public class AlunoDAOimpl implements AlunoDAO{
             alunos.remove(alunoParaRemover);
             JOptionPane.showMessageDialog(null, "Aluno removido com sucesso!");
             banco.remover(banco.conectar(), alunoParaRemover.getMatricula());
+            removerDoArquivo(file,alunoParaRemover);
         } else {
             JOptionPane.showMessageDialog(null, "Aluno não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -161,6 +179,25 @@ public class AlunoDAOimpl implements AlunoDAO{
         } catch (Exception e) {
             e.printStackTrace();
         }        
+    }
+    
+    public void removerDoArquivo(File file, Aluno aluno) {
+        StringBuilder str = new StringBuilder();
+        try(FileReader fr = new FileReader(file); BufferedReader br = new BufferedReader(fr)) {
+            String linha;
+            while((linha = br.readLine()) != null) {
+                if(!linha.contains(aluno.toString())) {
+                    str.append(linha).append(System.lineSeparator());
+                    System.out.println("Aluno removido");
+                }
+            }
+            
+            try(FileWriter fw = new FileWriter(file); BufferedWriter bw = new BufferedWriter(fw)) {
+                bw.write(str.toString());
+            }
+        }catch(IOException e) {
+           throw new RuntimeException(e);
+        }
     }
  }    
 
