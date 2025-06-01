@@ -111,7 +111,7 @@ public class AlunoDAOimpl implements AlunoDAO{
        else{
            alunos.add(alunoInserir);
            banco.inserir(banco.conectar(), alunoInserir);
-           salvarArquivo(file, alunoInserir, alunos);
+           salvarArquivo(file, alunoInserir);
            JOptionPane.showMessageDialog(null, "Aluno adicionado com sucesso!");
        }
     }
@@ -154,9 +154,8 @@ public class AlunoDAOimpl implements AlunoDAO{
             Collections.sort(alunos);
         }
     }
-    private void salvarArquivo(File file, Aluno aluno, List alunos){
+    private void salvarArquivo(File file, Aluno aluno){
        try (FileWriter fw = new FileWriter(file, true); BufferedWriter bw = new BufferedWriter(fw)) {
-            alunos.add(aluno);
             bw.write(aluno.toString());
             bw.newLine();    
         } catch (Exception e) {
