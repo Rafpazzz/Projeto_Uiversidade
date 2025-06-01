@@ -18,6 +18,7 @@ import javax.swing.JTextArea;
 import java.util.Comparator;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,6 +32,7 @@ public class Interface_Menu extends javax.swing.JFrame {
     File file = new File("armazena.csv");
     ListAlunos list = new ListAlunos();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    View banco = new View();
     
     /**
      * Creates new form Interface_Menu
@@ -452,13 +454,21 @@ public class Interface_Menu extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-
+        Interface_Menu menu = new Interface_Menu();
+                try {
+                menu.banco.retornaValoresBanco(menu.banco.conectar(), menu.listAlunos);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Erro ao carregar dados do banco: " + e.getMessage());
+                } 
+       
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Interface_Menu().setVisible(true);
+            public void run() {                 
+                menu.setVisible(true);
             }
         });
     }
+                
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButton1;
