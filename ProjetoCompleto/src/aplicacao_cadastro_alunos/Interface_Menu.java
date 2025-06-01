@@ -29,7 +29,6 @@ public class Interface_Menu extends javax.swing.JFrame {
     List<Aluno> listAlunos = new ArrayList<>();
     AlunoDAOimpl alunoMod = new AlunoDAOimpl();
    // Comparator<Aluno> comparadorIdade = new Comparator<Aluno>();
-    File file = new File("armazena.csv");
     ListAlunos list = new ListAlunos();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     View banco = new View();
@@ -432,24 +431,7 @@ public class Interface_Menu extends javax.swing.JFrame {
        
 //JOptionPane.showMessageDialog(null, listAlunos.toString(),"Lista de Alunos Cadastrados", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_MostrarLista
-
-
-    
-    private void salvarArquivo(File file, Aluno aluno){
-       try (FileWriter fw = new FileWriter(file, true); BufferedWriter bw = new BufferedWriter(fw)) {
-                        if (!listAlunos.contains(aluno)) {
-                            listAlunos.add(aluno);
-                            bw.write(aluno.toString());
-                            bw.newLine();
-                        } else {
-                            throw new RuntimeException("Elemento adicionado");
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }        
-    }
-    
+  
     /**
      * @param args the command line arguments
      */

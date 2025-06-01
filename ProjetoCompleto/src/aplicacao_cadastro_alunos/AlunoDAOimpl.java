@@ -4,6 +4,9 @@ package aplicacao_cadastro_alunos;
 import javax.swing.JOptionPane;
 import aplicacao_cadastro_alunos.Aluno;
 import aplicacao_cadastro_alunos.View;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,6 +24,7 @@ import java.time.Period;
 public class AlunoDAOimpl implements AlunoDAO{
     
     View banco = new View();
+    File file = new File("armazena.csv");
     
     @Override
     public boolean validarData(String data) {
@@ -107,6 +111,7 @@ public class AlunoDAOimpl implements AlunoDAO{
        else{
            alunos.add(alunoInserir);
            banco.inserir(banco.conectar(), alunoInserir);
+           salvarArquivo(file, alunoInserir, alunos);
            JOptionPane.showMessageDialog(null, "Aluno adicionado com sucesso!");
        }
     }
@@ -148,6 +153,15 @@ public class AlunoDAOimpl implements AlunoDAO{
         }else {
             Collections.sort(alunos);
         }
+    }
+    private void salvarArquivo(File file, Aluno aluno, List alunos){
+       try (FileWriter fw = new FileWriter(file, true); BufferedWriter bw = new BufferedWriter(fw)) {
+            alunos.add(aluno);
+            bw.write(aluno.toString());
+            bw.newLine();    
+        } catch (Exception e) {
+            e.printStackTrace();
+        }        
     }
  }    
 
