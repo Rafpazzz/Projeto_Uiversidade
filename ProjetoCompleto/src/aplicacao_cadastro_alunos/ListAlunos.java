@@ -20,10 +20,6 @@ public class ListAlunos extends javax.swing.JFrame {
     
     public ListAlunos() {
         initComponents();
-//        DefaultTableModel modelo = new DefaultTableModel(
-//            new Object[]{"Matrícula", "Nome", "Idade", "Nascimento", "CPF", "Telefone"}, 0
-//        );
-//        alunoList.setModel(modelo);
 
     }
     
