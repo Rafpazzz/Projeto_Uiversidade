@@ -1,6 +1,8 @@
 package aplicacao_cadastro_alunos;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.List;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -34,7 +36,7 @@ public class View {
     public void inserir(Connection conn, Aluno aluno) {
         try {
             if(conn != null) {
-                String sql = "INSERT INTO ALUNO (MATRICULA, NOME, IDADE, DT_NAS,TELEFONE,CPF) VALUES(?,?,?,?,?,?)";
+                String sql = "INSERT INTO ALUNO (MATRICULA, NOME, IDADE, DATANAS,TELEFONE,CPF) VALUES(?,?,?,?,?,?)";
                 
                 PreparedStatement stm = conn.prepareStatement(sql);
                 stm.setString(1,aluno.getMatricula());
@@ -63,6 +65,31 @@ public class View {
             stm.executeUpdate();
             
         } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void retornaValoresBanco(Connection conn, List<Aluno> alunos) {
+        String sql = "SELECT * FROM ALUNO";
+        
+        try(PreparedStatement stm = conn.prepareStatement(sql)) {
+            System.out.println("Iniciando Carregamento de Alunos");
+            ResultSet rs = null;
+            rs = stm.executeQuery();
+            while(rs.next()) {
+                
+                java.sql.Date dataSql = rs.getDate("dataNas");
+                LocalDate dataNascimento = null;
+                if (dataSql != null) {dataNascimento = dataSql.toLocalDate();}
+              
+                String str = rs.getString("cpf").trim();
+                char[] cpf = str.toCharArray();
+                Aluno a = new Aluno(rs.getString("nome"),rs.getString("matricula"), rs.getInt("idade"), dataNascimento, rs.getString("telefone"), cpf);
+                alunos.add(a); 
+                System.out.println("Aluno carregado");
+            }
+            
+        } catch(SQLException e){
             e.printStackTrace();
         }
     }
