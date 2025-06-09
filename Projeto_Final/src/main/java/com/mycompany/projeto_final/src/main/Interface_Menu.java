@@ -70,6 +70,7 @@ public class Interface_Menu extends javax.swing.JFrame {
         txtTelefone = new javax.swing.JFormattedTextField();
         txtCPF = new javax.swing.JFormattedTextField();
         jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
@@ -169,6 +170,13 @@ public class Interface_Menu extends javax.swing.JFrame {
             }
         });
 
+        jButton11.setText("Atualizar");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -201,7 +209,7 @@ public class Interface_Menu extends javax.swing.JFrame {
                             .addComponent(txtMatricula)
                             .addComponent(txtNome)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(300, 300, 300)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(274, 274, 274))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -218,6 +226,8 @@ public class Interface_Menu extends javax.swing.JFrame {
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton11)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -252,7 +262,8 @@ public class Interface_Menu extends javax.swing.JFrame {
                     .addComponent(jButton5)
                     .addComponent(jButton6)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10))
+                    .addComponent(jButton10)
+                    .addComponent(jButton11))
                 .addGap(18, 18, 18))
         );
 
@@ -469,6 +480,47 @@ public class Interface_Menu extends javax.swing.JFrame {
         txtMatricula.requestFocus();
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+         if (!alunoMod.verificaPreenchimento(txtMatricula.getText(), txtNome.getText(), txtTelefone.getText(), txtCPF.getText())) {
+            return;
+        }
+
+        String matricula = txtMatricula.getText().trim(); //trim tira espacos em branco
+        String nome = txtNome.getText().trim();
+        String telefone = txtTelefone.getText().trim();
+        String str2 = txtCPF.getText().trim();
+        char[] cpf = str2.toCharArray();
+
+        int idade = 0;
+        LocalDate dataValidada = null;
+
+        //verifica se a data foi adicionada certo
+        String dataVerifica = txtData.getText();
+
+        if (alunoMod.validarData(dataVerifica)) {
+            dataValidada = LocalDate.parse(txtData.getText(), formatter);
+            idade = alunoMod.calcularIdade(dataValidada);
+        } else {
+            JOptionPane.showMessageDialog(null, "Data inválida! Por favor corrija.");
+            txtData.requestFocus(); //o teclado volta para o local a ser alterado
+            return; //impede do codigo ser executado
+        }
+
+        Aluno alunoAtualizar = new Aluno(nome, matricula, idade, dataValidada, telefone, cpf);
+        alunoMod.atualizaLista(alunoAtualizar, listAlunos);
+        banco.atualizar(alunoAtualizar, listAlunos);
+        
+
+        // Limpa os campos após inserção
+        txtMatricula.setText("");
+        txtNome.setText("");
+        txtTelefone.setText("");
+        txtCPF.setText("");
+        txtData.setText("");
+
+        txtMatricula.requestFocus(); // a agulha de  digitação vai para o primeiro
+    }//GEN-LAST:event_jButton11ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -490,6 +542,7 @@ public class Interface_Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     public javax.swing.JButton jButton2;
     public javax.swing.JButton jButton3;
     public javax.swing.JButton jButton4;

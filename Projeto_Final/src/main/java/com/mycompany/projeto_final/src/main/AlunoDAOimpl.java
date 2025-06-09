@@ -199,6 +199,15 @@ public class AlunoDAOimpl implements AlunoDAO{
            throw new RuntimeException(e);
         }
     }
+    
+    public void atualizaLista(Aluno aluno, List lista) {
+        if(lista.contains(aluno)) {
+            lista.remove(aluno);
+            lista.add(aluno);
+        }else {
+            JOptionPane.showMessageDialog(null,"Esse Aluno não existe no sistema!","Notificação do Sistema",JOptionPane.ERROR_MESSAGE);
+        }
+    }
  }    
 
     
