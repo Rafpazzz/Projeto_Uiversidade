@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Raf
  */
 public class ListAlunos extends javax.swing.JFrame {
-
+    View banco = new View();
     /**
      * Creates new form ListAlunos
      */
