@@ -31,26 +31,28 @@ public class View {
     public void salvarBanco(Aluno aluno) {
         EntityManager entidade = View.getEntityManager(); //CRIA UMA CONECXÃO COM O MEU BANCO
         EntityTransaction tx = null;//REPRESENTA UMA FUNÇÃO DO MEU BANCO (EX:INSERT,SELECT,UPDATE...)
-        
+
         try {
             tx = entidade.getTransaction();
             tx.begin();//INICICA A TRANSAÇÃO/METODOS
             entidade.persist(aluno);//NESSA LINHA FALA PARA O JPA SALVAR ESSE OBJETO NO MEU BANCO
             tx.commit();//CONFIRMAR A AÇÃO
             System.out.println("Aluno salvo com sucesso");
-        }catch(Exception e) {
-            if(tx != null) tx.rollback(); //EM VIRTUDE DE ALGUM ERRO REFAZER A AÇÃO, PARA ASSIM NAO CAUSAR NENHUM COMFLITO DE DADOS
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback(); //EM VIRTUDE DE ALGUM ERRO REFAZER A AÇÃO, PARA ASSIM NAO CAUSAR NENHUM COMFLITO DE DADOS
+            }
             e.printStackTrace();
-        }finally {
+        } finally {
             entidade.close();
         }
 
     }
-    
+
     public void removerDoBanco(Aluno aluno) {
         EntityManager entidade = View.getEntityManager();
         EntityTransaction tx = null;
-        
+
         try {
             tx = entidade.getTransaction();
             tx.begin();
@@ -58,29 +60,52 @@ public class View {
             entidade.remove(alunoManaged);
             tx.commit();
             System.out.println("Aluno removido com sucesso");
-        }catch(Exception e) {
-            if(tx != null) tx.rollback();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
             e.printStackTrace();
-        }finally {
+        } finally {
             entidade.close();
         }
     }
-    
+
     public void mostrarLista(List<Aluno> alunos) {
         EntityManager em = View.getEntityManager();
-        
+
         try {
             TypedQuery<Aluno> q = em.createQuery("SELECT a FROM Aluno a", Aluno.class);
             List<Aluno> resultado = q.getResultList();
-            
+
             alunos.addAll(resultado);
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             em.close();
         }
-        
+
+    }
+
+    public void atualizar(Aluno aluno, List lista) {
+        EntityManager em = View.getEntityManager();
+        EntityTransaction tx = null;
+        if (lista.contains(aluno)) {
+            try {
+                tx = em.getTransaction();
+                tx.begin();
+                em.merge(aluno);
+                tx.commit();
+            }catch(Exception e) {
+                e.printStackTrace();
+                if(tx != null && tx.isActive()) {
+                    tx.rollback();
+                }
+            }finally {
+                em.close();
+            }
+        }else {
+            System.out.println("Aluno invalido");
+        }
     }
 
 }
-
