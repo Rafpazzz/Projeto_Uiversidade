@@ -358,7 +358,7 @@ public class Interface_Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_PesquisarAluno
 
     private void ExcluirAluno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirAluno
-        String matriculaExcluir = JOptionPane.showInputDialog(null, "Digite a matrícula do aluno que deseja excluir:");
+        String matriculaExcluir = JOptionPane.showInputDialog(null, "Digite a matrícula do aluno que deseja excluir:", "Excluir Aluno", JOptionPane.QUESTION_MESSAGE);
 
         if (matriculaExcluir != null && !matriculaExcluir.trim().isEmpty()) {
             alunoMod.removerAluno(listAlunos, matriculaExcluir.trim());
@@ -440,7 +440,7 @@ public class Interface_Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_MostrarLista
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        String matriculaPesquisa = JOptionPane.showInputDialog(null, "Digite a posição que deseja adicionar:", "Adicionar Aluno em uma Posição Expecifica", JOptionPane.QUESTION_MESSAGE);
+        String posicaoAdicionar = JOptionPane.showInputDialog(null, "Digite a posição que deseja adicionar:", "Adicionar Aluno em uma Posição Expecifica", JOptionPane.QUESTION_MESSAGE);
 
         if (!alunoMod.verificaPreenchimento(txtMatricula.getText(), txtNome.getText(), txtTelefone.getText(), txtCPF.getText())) {
             return;
@@ -468,7 +468,7 @@ public class Interface_Menu extends javax.swing.JFrame {
         }
 
         Aluno alunoInserir = new Aluno(nome, matricula, idade, dataValidada, telefone, cpf);
-        alunoMod.inserirEmPosicao(listAlunos, alunoInserir, matriculaPesquisa);
+        alunoMod.inserirEmPosicao(listAlunos, alunoInserir, posicaoAdicionar);
 
         // Limpa os campos após inserção
         txtMatricula.setText("");
