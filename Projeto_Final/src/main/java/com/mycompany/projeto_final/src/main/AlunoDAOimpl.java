@@ -20,6 +20,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -32,16 +34,31 @@ public class AlunoDAOimpl implements AlunoDAO{
     
     @Override
     public boolean validarData(String data) {
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    sdf.setLenient(false);  // Não permite datas inválidas
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.setLenient(false);  // Não permite datas inválidas
 
         try {
-            sdf.parse(data);
-            return true;  // Data válida
+            Date dataConvertida = sdf.parse(data);
+
+            // Obtém o ano da data informada
+            Calendar calendarData = Calendar.getInstance();
+            calendarData.setTime(dataConvertida);
+            int anoData = calendarData.get(Calendar.YEAR);
+
+            // Obtém o ano atual
+            int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
+
+            // Verifica se o ano da data é maior que o ano atual
+            if (anoData > anoAtual) {
+                return false;
+            }
+
+            return true;  // Data válida e ano não superior ao atual
         } catch (ParseException e) {
             return false;  // Data inválida
         }
-    } 
+    }
+ 
     
     @Override
     public int calcularIdade(LocalDate dataNascimento) {

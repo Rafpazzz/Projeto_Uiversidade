@@ -69,8 +69,8 @@ public class Interface_Menu extends javax.swing.JFrame {
         txtData = new javax.swing.JFormattedTextField();
         txtTelefone = new javax.swing.JFormattedTextField();
         txtCPF = new javax.swing.JFormattedTextField();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        AdicionarPosicao = new javax.swing.JButton();
+        Atualizar = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
@@ -163,17 +163,17 @@ public class Interface_Menu extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        jButton10.setText("Adicioner em Posicao");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        AdicionarPosicao.setText("Adicionar em Posicao");
+        AdicionarPosicao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                AdicionarPosicao(evt);
             }
         });
 
-        jButton11.setText("Atualizar");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        Atualizar.setText("Atualizar");
+        Atualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                Atualizar(evt);
             }
         });
 
@@ -209,7 +209,6 @@ public class Interface_Menu extends javax.swing.JFrame {
                             .addComponent(txtMatricula)
                             .addComponent(txtNome)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(274, 274, 274))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -225,9 +224,9 @@ public class Interface_Menu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton10)
+                        .addComponent(AdicionarPosicao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton11)
+                        .addComponent(Atualizar)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -262,8 +261,8 @@ public class Interface_Menu extends javax.swing.JFrame {
                     .addComponent(jButton5)
                     .addComponent(jButton6)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10)
-                    .addComponent(jButton11))
+                    .addComponent(AdicionarPosicao)
+                    .addComponent(Atualizar))
                 .addGap(18, 18, 18))
         );
 
@@ -439,7 +438,7 @@ public class Interface_Menu extends javax.swing.JFrame {
 //JOptionPane.showMessageDialog(null, listAlunos.toString(),"Lista de Alunos Cadastrados", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_MostrarLista
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void AdicionarPosicao(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarPosicao
         String matriculaPesquisa = JOptionPane.showInputDialog(null, "Digite a posição que deseja adicionar:", "Adicionar Aluno em uma Posição Expecifica", JOptionPane.QUESTION_MESSAGE);
 
         if (!alunoMod.verificaPreenchimento(txtMatricula.getText(), txtNome.getText(), txtTelefone.getText(), txtCPF.getText())) {
@@ -478,9 +477,9 @@ public class Interface_Menu extends javax.swing.JFrame {
         txtData.setText("");
 
         txtMatricula.requestFocus();
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_AdicionarPosicao
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void Atualizar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Atualizar
          if (!alunoMod.verificaPreenchimento(txtMatricula.getText(), txtNome.getText(), txtTelefone.getText(), txtCPF.getText())) {
             return;
         }
@@ -519,7 +518,7 @@ public class Interface_Menu extends javax.swing.JFrame {
         txtData.setText("");
 
         txtMatricula.requestFocus(); // a agulha de  digitação vai para o primeiro
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_Atualizar
 
     /**
      * @param args the command line arguments
@@ -540,9 +539,9 @@ public class Interface_Menu extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AdicionarPosicao;
+    private javax.swing.JButton Atualizar;
     public javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     public javax.swing.JButton jButton2;
     public javax.swing.JButton jButton3;
     public javax.swing.JButton jButton4;
