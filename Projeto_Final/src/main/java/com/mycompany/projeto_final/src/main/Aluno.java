@@ -64,6 +64,11 @@ public class Aluno implements Comparable<Aluno> {
         Aluno aluno = (Aluno) o;
         return Objects.equals(matricula, aluno.matricula);
     }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(matricula);
+    }
 
     @Override
     public int compareTo(Aluno o) {
@@ -74,11 +79,6 @@ public class Aluno implements Comparable<Aluno> {
         } else {
             return 1;
         }
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(matricula);
     }
 
     public String getMatricula() {
